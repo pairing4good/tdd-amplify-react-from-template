@@ -1,0 +1,7 @@
+{
+  "GHSA-rp65-9cf3-cjxr": {
+    "active": true,
+    "notes": "Ignored until react fixes nth-check issue",
+    "expiry": "2023-01-01"
+  }
+}
