@@ -1,7 +1,7 @@
 # TDD AWS Amplify React App
 
-![Security Checks](https://github.com/pairing4good/react-18-project-template/actions/workflows/codeql-analysis.yml/badge.svg)
-![React Tests](https://github.com/pairing4good/react-18-project-template/actions/workflows/node.js.yml/badge.svg)
+![Security Checks](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/codeql-analysis.yml/badge.svg)
+![React Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/node.js.yml/badge.svg)
 
 
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a react app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
@@ -27,7 +27,25 @@ There are a few benefits of starting at the top of the testing pyramid:
 - Install [Node Version Manager](https://github.com/nvm-sh/nvm). `nvm` allows you to quickly install and use different versions of node via the command line.
 - Run `nvm install node` to install the latest version of node
 - Run `nvm use node` to use the latest version of node
-- Use the [pairing4good/tdd-react-18-template](https://github.com/pairing4good/tdd-react-18-template) template.  Follow the [Usage](https://github.com/pairing4good/tdd-react-18-template#usage) instructions and name the project `tdd-amplify-react`.
+
+- If you haven't already, [create](https://docs.github.com/en/github/getting-started-with-github/signing-up-for-github/signing-up-for-a-new-github-account) a GitHub account
+- Use the [pairing4good/tdd-react-18-template](https://github.com/pairing4good/tdd-react-18-template) template.
+
+- Click the `Use this template` button on the top right of [pairing4good/tdd-react-18-template](https://github.com/pairing4good/tdd-react-18-template)
+- Click on `Settings > Code security and analysis` on your new repository
+  - Enable `Dependabot alerts`
+  - Enable `Dependabot security updates`
+- Update badges at the top of the `README.md` to point to your new repositories GitHub Action results
+
+```
+![Security Checks](https://github.com/{username}/{repository}/actions/workflows/codeql-analysis.yml/badge.svg)
+![React Tests](https://github.com/{username}/{repository}/actions/workflows/node.js.yml/badge.svg)
+![Cypress Tests](https://github.com/{username}/{repository}/actions/workflows/cypress.yml/badge.svg)
+```
+- Update the `name` of your application in the `package.json` file in the root of your repository
+
+- [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) your new repository
+
 </details>
 
 <details>
@@ -1609,5 +1627,129 @@ afterEach(() => {
   - Delete the `.github/workflows/cypress.yml` file
   - Remove `![Cypress Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/cypress.yml/badge.svg)` from the top of the `README.md` file.
 
-  [Code for this section]()
+  [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/5788564a7b9aaad1a44b54c9ec4551a18f548443)
+</details>
+
+<details>
+  <summary>Notes App Deployment</summary>
+
+## Notes App Deployment
+
+Amplify provides the ability to [deploy](https://docs.amplify.aws/guides/hosting/git-based-deployments/q/platform/js), build, run tests and host your application ([Continuous Delivery](https://en.wikipedia.org/wiki/Continuous_delivery))
+
+- Be sure to [push](https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line) your local changes up to your GitHub account
+
+- Log In to your http://console.aws.amazon.com
+- Open `AWS Amplify`
+- Open the backend that you just pushed up (`amplify push --y`).
+- Open the `Hosting environments` tab
+- Select `GitHub` and `Connect branch`
+- Connect Amplify with your GitHub account
+- Select the GitHub repository where your code is stored
+- Complete the set up, save and deploy.
+
+- **In order for the Cypress tests to work in the Amplify build you will need to add the same properties that you added to the `cypress.env.json` file because you did not push that file up since you added it to the `.gitignore` file.**
+- Each environment variable has a prefix of `cypress_`
+
+  - cypress_username
+  - cypress_password
+  - cypress_userPoolId
+  - cypress_clientId
+
+- On the left navigation within your AWS Amplify Application, select `Environment variables`
+- Click the `Manage variables` button
+- Click the `Add variable` button
+- Type `cypress_username` in the field labeled `Enter variable here`
+- Type the corresponding value from your `cypress.env.json` in the field labeled `Enter value here`
+- Repeat the previous three steps for `cypress_password`, `cypress_userPoolId`, and `cypress_clientId`
+- Click the `Save` button
+
+### Adding Tests to Amplify Build
+- Add a new file named `amplify.yml` to the root of your repository with the following content
+
+```yml
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - '# Execute Amplify CLI with the helper script'
+        - amplifyPush --simple
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+
+test:
+  phases:
+    preTest:
+      commands:
+        - npm ci
+        - npm install mocha@5.2.0 mochawesome mochawesome-merge mochawesome-report-generator
+    test:
+      commands:
+        - npm test -- --watchAll=false
+        - npx start-test http://127.0.0.1:3000 'cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
+    postTest:
+      commands:
+        - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
+  artifacts:
+    baseDirectory: cypress
+    configFilePath: '**/mochawesome.json'
+    files:
+      - '**/*.png'
+      - '**/*.mp4'
+```
+This file overrides the default build setting provided by Amplify.  However, to display the `Test` green or red circle in the build status timeline, you must update the default build settings.
+- On the left navigation within your AWS Amplify Application, select `Build settings`
+- Click the `Edit` button in the `App build specification` section
+- At the bottom of the `Edit` window add the following
+
+```
+...
+  cache:
+    paths:
+      - node_modules/**/*
+
+test:
+```
+- Click the `Save` button
+
+By adding `test:`, the `Test` circle will now display in the build status timeline.  Nevertheless, the build instructions will be read from the root of your repository and will override the content of the default build settings.
+
+- Commit your local changes and [push](https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line) them up to your GitHub account
+
+- Amplify will: provision, build, test, deploy and verify your application
+- The `Test` step in the build should pass (Green).
+
+So what does this Amplify build actually do?
+
+- Provision
+  - Provisions a [docker image](https://docs.docker.com/get-started/overview) where our React application can be built.
+- Build
+  - [Clones](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) your GitHub repository
+  - Builds your backend AWS services with the [CloudFormation](https://aws.amazon.com/cloudformation) scripts that Amplify generated for you.
+  - Builds your frontend React application using `npm` commands provided through your `amplify.yml`
+- Test
+  - Starts the application locally within the Docker image and Tests your application.
+- Deploy
+  - If the tests pass it [deploys](https://en.wikipedia.org/wiki/Software_deployment) your React application to a public URL where anyone can access it. **Important: This step automatically prevents broken software from being released to your customers. We value working software and we bake it into our [Deployment Pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html)**
+- Verify
+
+  - Generates screenshots of your application's home page to ensure your app renders well on different mobile resolutions.
+
+- This deployment pipeline kicks off every time you push your code up to GitHub.
+
+[Code for this section]()
 </details>
