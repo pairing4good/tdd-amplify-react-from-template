@@ -9,6 +9,7 @@
     "better-npm-audit": "^3.7.3",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "localforage": "^1.10.0",
     "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

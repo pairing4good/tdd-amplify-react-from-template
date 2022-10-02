@@ -1222,6 +1222,105 @@ assert expected <input> to have value '', but the value was test note
 
 - Green! Commit!
 
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/ed91bcd31b2e613698456d345cf467934ecef9fe)
+
+</details>
+
+<details>
+  <summary>Saving Notes For Real</summary>
+
+## Saving Notes For Real
+
+React creates a [single page web application](https://en.wikipedia.org/wiki/Single-page_application). This means that the React state does not [persist](<https://en.wikipedia.org/wiki/Persistence_(computer_science)>) beyond a web page refresh. In other words, if you refresh your browser page you will lose all of the notes you created.
+
+Since Cypress tests the application in a browser, this is the most logical place to test this user expectation.
+
+```js
+it('should load previously saved notes on browser refresh', () => {
+  cy.reload();
+
+  cy.get('[data-testid=test-name-0]').should('have.text', 'test note');
+  cy.get('[data-testid=test-description-0]').should('have.text', 'test note description');
+});
+```
+
+- We now have a failing test. In order to save notes between page reloads we will use [localforage](https://www.npmjs.com/package/localforage).
+
+- Run `npm install localforage`
+- Add a callback function to `App.js` that will look up notes that are saved in `localforage`
+
+```js
+...
+import localForage from 'localforage';
+...
+function App() {
+  const [notes, setNotes] = useState([]);
+  const [formData, setFormData] = useState({ name: '', description: '' });
+
+  const fetchNotesCallback = () => {
+    localForage
+      .getItem('notes')
+      .then((savedNotes) => {
+        if (savedNotes) return setNotes(savedNotes);
+        return setNotes([]);
+      })
+      .catch((error) => {
+        process.error('failed to setNotes', error.message);
+      });
+  };
+  ...
+```
+
+- The `if` check determines if there are any saved notes in `localforage` and sets the `notes` accordingly.
+
+- Add a callback function to `App.js` that will save newly created notes to `localforage`
+
+```js
+const createNote = () => {
+  const updatedNoteList = [...notes, formData];
+  setNotes(updatedNoteList);
+  localForage.setItem('notes', updatedNoteList);
+};
+```
+
+- Update the `NoteForm` component in `App.js` to take the new `createNote` callback function instead of calling the `setNotes` hook directly.
+
+```js
+<NoteForm
+  notes={notes}
+  formData={formData}
+  setFormDataCallback={setFormData}
+  setNotesCallback={createNote}
+/>
+```
+
+- To load the saved notes when the application is loaded, add the [useEffect](https://reactjs.org/docs/hooks-effect.html#example-using-hooks) hook and call the `fetchNotesCallback` in `App.js`.
+
+```js
+...
+import React, { useState, useEffect } from 'react';
+...
+useEffect(() => {
+  fetchNotesCallback();
+}, []);
+```
+
+- Lastly, make sure you clean up the persisted notes after the Cypress test is run.
+
+```js
+import localForage from 'localforage';
+...
+after(() => {
+  localForage
+    .clear()
+    .then(() => true)
+    .catch((error) => process.error('failed to clean up', error.message));
+});
+```
+
+- All the tests are Green
+- Commit
+
 [Code for this section]()
 
 </details>

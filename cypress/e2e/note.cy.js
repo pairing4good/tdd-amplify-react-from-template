@@ -1,5 +1,14 @@
+import localForage from 'localforage';
+
 beforeEach(() => {
   cy.visit('/');
+});
+
+after(() => {
+  localForage
+    .clear()
+    .then(() => true)
+    .catch((error) => process.error('failed to clean up', error.message));
 });
 
 describe('Note Capture', () => {
@@ -20,5 +29,12 @@ describe('Note Capture', () => {
 
   it('should have header', () => {
     cy.get('h1').should('have.text', 'My Notes App');
+  });
+
+  it('should load previously saved notes on browser refresh', () => {
+    cy.reload();
+
+    cy.get('[data-testid=test-name-0]').should('have.text', 'test note');
+    cy.get('[data-testid=test-description-0]').should('have.text', 'test note description');
   });
 });
