@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import localForage from 'localforage';
+import { findAll, save } from './NoteRepository';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
 import Header from './Header';
@@ -9,22 +9,16 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState({ name: '', description: '' });
 
-  const fetchNotesCallback = () => {
-    localForage
-      .getItem('notes')
-      .then((savedNotes) => {
-        if (savedNotes) return setNotes(savedNotes);
-        return setNotes([]);
-      })
-      .catch((error) => {
-        process.error('failed to setNotes', error.message);
-      });
+  const fetchNotesCallback = async () => {
+    const retrievedNotes = await findAll();
+    if (retrievedNotes) setNotes(retrievedNotes);
+    else setNotes([]);
   };
 
-  const createNote = () => {
+  const createNote = async () => {
     const updatedNoteList = [...notes, formData];
     setNotes(updatedNoteList);
-    localForage.setItem('notes', updatedNoteList);
+    await save(formData);
   };
 
   useEffect(() => {
