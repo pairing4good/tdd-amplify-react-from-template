@@ -1078,6 +1078,96 @@ test('should add a new note when name and description are provided', () => {
 - Rerun your Cypress tests.
 - Commit!
 
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/a16de75f8e6db1ca57a4f08b798141a31e6e42e2)
+
+</details>
+
+<details>
+  <summary>Reset Form</summary>
+
+## Reset Form
+
+When a note is saved the name and description fields should be reset to empty strings.
+
+- Add a test to `NoteForm.test.js`
+
+```js
+test('should reset the form after a note is saved', () => {
+  formData.name = 'test name';
+  formData.description = 'test description';
+
+  const button = screen.getByTestId('note-form-submit');
+
+  fireEvent.click(button);
+
+  expect(formData.name).toBe('');
+  expect(formData.description).toBe('');
+});
+```
+
+- Make this failing test go Green
+
+```js
+function createNote() {
+  if (!formData.name || !formData.description) return;
+  setNotesCallback([...notes, formData]);
+  formData.name = '';
+  formData.description = '';
+}
+```
+
+- Green
+- Run the Cypress tests and it's **Red**.
+
+What happened? Well, while this approach worked for a lower level component test it doesn't work when React is managing its own [state](https://reactjs.org/docs/state-and-lifecycle.html). React clearly warns us that we should [not modify state directly](https://reactjs.org/docs/state-and-lifecycle.html#do-not-modify-state-directly). Instead you should use the [setState](https://reactjs.org/docs/hooks-state.html) callback hook.
+
+- Let's update the test to use the `setFormDataCallback` callback.
+
+```js
+const setNotesCallback = jest.fn();
+const setFormDataCallback = jest.fn();
+const formData = { name: '', description: '' };
+
+beforeEach(() => {
+  render(
+    <NoteForm
+      notes={[]}
+      setNotesCallback={setNotesCallback}
+      setFormDataCallback={setFormDataCallback}
+      formData={formData}
+    />
+  );
+});
+...
+test('should reset the form after a note is saved', () => {
+  formData.name = 'test name';
+  formData.description = 'test description';
+
+  const button = screen.getByTestId('note-form-submit');
+
+  fireEvent.click(button);
+
+  expect(setFormDataCallback).toHaveBeenCalledWith({
+    name: '',
+    description: ''
+  });
+});
+```
+
+- This red test drives these code changes
+
+```js
+function createNote() {
+  if (!formData.name || !formData.description) return;
+  setNotesCallback([...notes, formData]);
+  setFormDataCallback({ name: '', description: '' });
+}
+```
+
+- Green!
+- The Cypress test is now Green!
+- Commit
+
 [Code for this section]()
 
 </details>
