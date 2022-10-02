@@ -2,12 +2,14 @@ import './App.css';
 import React, { useState } from 'react';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
+import Header from './Header';
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState({ name: '', description: '' });
   return (
     <div className="App">
+      <Header />
       <NoteForm
         notes={notes}
         formData={formData}
