@@ -353,7 +353,7 @@ test('should display the description placeholder', () => {
 
 - Commit on Green.
 
-[Code for this section]()
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/ea1861b8ca295103312db32cc5667111b531d9ba)
 
 
 ### Refactor
