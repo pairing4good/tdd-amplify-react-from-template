@@ -2,7 +2,6 @@
 
 ![Security Checks](https://github.com/pairing4good/react-18-project-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![React Tests](https://github.com/pairing4good/react-18-project-template/actions/workflows/node.js.yml/badge.svg)
-![Cypress Tests](https://github.com/pairing4good/react-18-project-template/actions/workflows/cypress.yml/badge.svg)
 
 
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a react app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
@@ -1586,6 +1585,29 @@ afterEach(() => {
 - Green!
 - Commit
 
-[Code for this section]()
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/1f88ec2a2ddceb5161ef64a04b9cbceacc0a7855)
 
+</details>
+
+<details>
+  <summary>Fix Continuous Integration Build</summary>
+  
+  ## Failing Continuous Integration Build
+
+  While all the tests pass locally, on my machine, the Cypress tests are breaking on GitHub with the following error
+
+  ```
+  Module not found: Error: Can't resolve './aws-exports' in '/home/runner/work/tdd-amplify-react-from-template/tdd-amplify-react-from-template/src'
+  ```
+
+  The `aws-exports` file was created and added to the `.gitignore` file in the `Set Up AWS Amplify` section of this tutorial.  Once we added `import config from './aws-exports';` to  the `src/index.js` file we required `aws-exports` for testing.  Since we added this file to `.gitignore` it was not committed or pushed up to [GitHub](https://github.com/).  As a result, the [GitHub Action](https://docs.github.com/en/actions) tests are failing.
+
+  In order for these tests to pass [GitHub Action](https://docs.github.com/en/actions) would need access to Amplify, configure Amplify on the build machine and have the ability to deploy the backend to Amplify.  Instead of setting up this tight coupling from [GitHub](https://github.com/) to [AWS Amplify](https://aws.amazon.com/amplify), we will utilize the [build process](https://docs.aws.amazon.com/amplify/latest/userguide/build-settings.html) provided within [Amplify](https://aws.amazon.com/amplify).  This will be set up in the next section.
+
+  For now, let's remove the [Cypress]() tests from [GitHub Actions](https://docs.github.com/en/actions) and the build badge from the `README.md` file.
+
+  - Delete the `.github/workflows/cypress.yml` file
+  - Remove `![Cypress Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/cypress.yml/badge.svg)` from the top of the `README.md` file.
+
+  [Code for this section]()
 </details>
