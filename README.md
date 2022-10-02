@@ -330,7 +330,7 @@ test('should display the name placeholder', () => {
 
 - Commit on Green. And always be looking for ways to refactor your code. Small improvements over time are easier to make than large changes when your code is a mess.
 
-[Code for this section]()
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/24fbaf7fc4ded7daa4af169961853abbebaa82f2)
 
 ### Description Input Test
 

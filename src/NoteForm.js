@@ -2,7 +2,7 @@ function NoteForm() {
   return (
     <div>
       <input data-testid="note-name-field" placeholder="Note Name" />
-      <input data-testid="note-description-field" />
+      <input data-testid="note-description-field" placeholder="Note Description" />
       <button data-testid="note-form-submit" type="button">
         Create Note
       </button>
