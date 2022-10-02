@@ -25,6 +25,7 @@ yarn-error.log*
 # cypress
 cypress/screenshots
 cypress/videos
+cypress.env.json
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend

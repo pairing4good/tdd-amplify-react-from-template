@@ -1,9 +1,12 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import { findAll, save } from './NoteRepository';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
 import Header from './Header';
+// eslint-disable-next-line import/no-unresolved
+import '@aws-amplify/ui-react/styles.css';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -26,16 +29,18 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header />
-      <NoteForm
-        notes={notes}
-        formData={formData}
-        setFormDataCallback={setFormData}
-        setNotesCallback={createNote}
-      />
-      <NoteList notes={notes} />
-    </div>
+    <Authenticator>
+      <div className="App">
+        <Header />
+        <NoteForm
+          notes={notes}
+          formData={formData}
+          setFormDataCallback={setFormData}
+          setNotesCallback={createNote}
+        />
+        <NoteList notes={notes} />
+      </div>
+    </Authenticator>
   );
 }
 

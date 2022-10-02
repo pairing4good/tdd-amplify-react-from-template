@@ -10,6 +10,11 @@
       "StackName": "amplify-tddamplifyreactfromt-dev-73002",
       "StackId": "arn:aws:cloudformation:us-east-2:709878084777:stack/amplify-tddamplifyreactfromt-dev-73002/f0ae8e80-424d-11ed-b2cb-02c31a87b5c6",
       "AmplifyAppId": "d34hsq6krm2wel"
+    },
+    "categories": {
+      "auth": {
+        "tddamplifyreactfromtdd25a307": {}
+      }
     }
   }
 }

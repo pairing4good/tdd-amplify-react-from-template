@@ -1,14 +1,22 @@
 import localForage from 'localforage';
 
-beforeEach(() => {
-  cy.visit('/');
+before(() => {
+  cy.signIn();
 });
 
 after(() => {
-  localForage
-    .clear()
-    .then(() => true)
-    .catch((error) => process.error('failed to clean up', error.message));
+  cy.clearLocalStorageSnapshot();
+  cy.clearLocalStorage();
+  localForage.clear();
+});
+
+beforeEach(() => {
+  cy.restoreLocalStorage();
+  cy.visit('/');
+});
+
+afterEach(() => {
+  cy.saveLocalStorage();
 });
 
 describe('Note Capture', () => {
