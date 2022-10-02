@@ -1751,5 +1751,104 @@ So what does this Amplify build actually do?
 
 - This deployment pipeline kicks off every time you push your code up to GitHub.
 
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/156482d532e70a9e7d7d4c03bd9706f0e7fbd544)
+</details>
+
+<details>
+  <summary>Log Out</summary>
+
+## Log Out
+
+While users can now log into the notes application they can't log back out.
+
+- Add a Cypress test that will drive the production code changes
+
+```js
+it('should have an option to sign out', () => {
+  cy.get('[data-testid=sign-out]').click();
+  cy.get('[data-amplify-authenticator]').should('exist');
+});
+```
+- Run all the tests
+- Red
+
+- Add the following [properties](https://reactjs.org/docs/components-and-props.html) to the `App.js` component that come from the [Authenticator](https://ui.docs.amplify.aws/react/connected-components/authenticator#3-add-the-authenticator).  Pass the `signOut` and `user` properties to the `Header` component.
+
+```js
+<Authenticator>
+  {({ signOut, user }) => (
+    <div className="App">
+      <Header signOut={signOut} user={user} />
+      ...
+    </div>
+  )}
+</Authenticator>
+```
+
+- Test drive the `Header.js` component by adding the following to the `src/test/Header.test.js` file
+
+```js
+import { render, screen } from '@testing-library/react';
+import Header from '../Header';
+
+const signOut = jest.fn();
+const user = { username: 'testUserName' };
+
+beforeEach(() => {
+  render(<Header signOut={signOut} user={user} />);
+});
+
+test('should display header', () => {
+  const heading = screen.getByRole('heading', { level: 1 });
+  expect(heading).toHaveTextContent('My Notes App');
+});
+
+test('should display username', () => {
+  const greeting = screen.getByTestId('username-greeting');
+  expect(greeting).toHaveTextContent('Hello testUserName');
+});
+
+test('should display sign out', () => {
+  const signOutButton = screen.getByTestId('sign-out');
+  expect(signOutButton).toHaveTextContent('Sign out');
+});
+
+```
+
+- Add the following to the `Header.js` component
+
+```js
+import PropTypes from 'prop-types';
+
+function Header(props) {
+  const { signOut, user } = props;
+
+  return (
+    <div>
+      <div>
+        <span data-testid="username-greeting">Hello {user.username} &nbsp;</span>
+        <button data-testid="sign-out" type="button" onClick={signOut}>
+          Sign out
+        </button>
+      </div>
+      <h1>My Notes App</h1>
+    </div>
+  );
+}
+
+Header.propTypes = {
+  signOut: PropTypes.func.isRequired,
+  user: PropTypes.shape({ username: PropTypes.string }).isRequired
+};
+
+export default Header;
+
+```
+
+- Run all the tests
+- Green!
+- Commit
+
 [Code for this section]()
+
 </details>

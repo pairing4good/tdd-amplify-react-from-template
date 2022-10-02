@@ -45,4 +45,9 @@ describe('Note Capture', () => {
     cy.get('[data-testid=test-name-0]').should('have.text', 'test note');
     cy.get('[data-testid=test-description-0]').should('have.text', 'test note description');
   });
+
+  it('should have an option to sign out', () => {
+    cy.get('[data-testid=sign-out]').click();
+    cy.get('[data-amplify-authenticator]').should('exist');
+  });
 });

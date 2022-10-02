@@ -30,16 +30,18 @@ function App() {
 
   return (
     <Authenticator>
-      <div className="App">
-        <Header />
-        <NoteForm
-          notes={notes}
-          formData={formData}
-          setFormDataCallback={setFormData}
-          setNotesCallback={createNote}
-        />
-        <NoteList notes={notes} />
-      </div>
+      {({ signOut, user }) => (
+        <div className="App">
+          <Header signOut={signOut} user={user} />
+          <NoteForm
+            notes={notes}
+            formData={formData}
+            setFormDataCallback={setFormData}
+            setNotesCallback={createNote}
+          />
+          <NoteList notes={notes} />
+        </div>
+      )}
     </Authenticator>
   );
 }
