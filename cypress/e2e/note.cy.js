@@ -1,5 +1,3 @@
-import localForage from 'localforage';
-
 before(() => {
   cy.signIn();
 });
@@ -7,7 +5,6 @@ before(() => {
 after(() => {
   cy.clearLocalStorageSnapshot();
   cy.clearLocalStorage();
-  localForage.clear();
 });
 
 beforeEach(() => {

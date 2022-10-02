@@ -19,9 +19,9 @@ function App() {
   };
 
   const createNote = async () => {
-    const updatedNoteList = [...notes, formData];
+    const newNote = await save(formData);
+    const updatedNoteList = [...notes, newNote];
     setNotes(updatedNoteList);
-    await save(formData);
   };
 
   useEffect(() => {

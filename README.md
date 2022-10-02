@@ -1849,6 +1849,115 @@ export default Header;
 - Green!
 - Commit
 
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/20206dd5505929555a8e7173c38b9eb7ac394087)
+
+</details>
+
+<details>
+  <summary>Backend API</summary>
+
+## Backend API
+
+Now that we have user authentication hooked up, we need to add the ability for customers to get their "notes to show up on their mobile phone browser too". This means that we can't use local storage on the user's computer anymore. Instead we need to build a backend [API](https://en.wikipedia.org/wiki/API) that will store notes independently from the frontend code.
+
+- Run `amplify add api` at the root of your project
+
+```
+Select from one of the below mentioned services: GraphQL
+Here is the GraphQL API that we will create. Select a setting to edit or continue Continue
+Choose a schema template: Single object with fields (e.g., “Todo” with ID, name, description)
+```
+
+- [GraphQL](https://graphql.org/) is an alternative to [REST](Representational state transfer). GraphQL APIs are more flexible than REST APIs.
+- This command created
+
+  - `amplify/backend/api/`
+  - `amplify/backend/backend-config.json`
+
+- Update the contents of the `amplify/backend/api/tddamplifyreact/schema.graphql` file with
+
+```
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type Note @model {
+  id: ID!
+  name: String!
+  description: String
+}
+```
+`input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }` allows you to get started quickly without worrying about authorization rules. Review the [Authorization rules](https://docs.amplify.aws/cli/graphql/authorization-rules/) section to setup the appropriate access control for your GraphQL API. (https://docs.amplify.aws/cli/graphql/overview/#creating-your-first-table)
+
+- Run `amplify push --y`
+
+- This command created/updated the following resources on AWS
+  - amplify-tddamplifyreact-dev-8… AWS::CloudFormation::Stack
+  - apitddamplifyreact             AWS::CloudFormation::Stack
+  - authtddamplifyreact414f1c62    AWS::CloudFormation::Stack
+  - GraphQLAPI                     AWS::AppSync::GraphQLApi
+  - GraphQLAPITransformerSchema3C… AWS::AppSync::GraphQLSchema
+  - GraphQLAPIDefaultApiKey215A6D… AWS::AppSync::ApiKey
+  - GraphQLAPINONEDS95A13CF0       AWS::AppSync::DataSource
+  - Note                           AWS::CloudFormation::Stack
+  - CustomResourcesjson            AWS::CloudFormation::Stack
+
+- If you would like to explore the backend, take a look at [Amplify Studio](https://docs.amplify.aws/console/).
+
+### Cut Over Repository To Use GraphQL
+
+Now that we have a GraphQL API that is storing our notes in a [DynamoDB](https://aws.amazon.com/dynamodb) table, we can replace `localforage` calls with GraphQL API calls.
+
+- Replace `localforage` calls in the `NoteRepository` with GraphQL API calls
+
+```js
+import { API } from 'aws-amplify';
+import { listNotes } from './graphql/queries';
+import { createNote as createNoteMutation } from './graphql/mutations';
+
+export async function findAll() {
+  const apiData = await API.graphql({ query: listNotes });
+  return apiData.data.listNotes.items;
+}
+
+export async function save(note) {
+  const apiData = await API.graphql({
+    query: createNoteMutation,
+    variables: { input: note }
+  });
+  return apiData.data.createNote;
+}
+```
+
+- We do need to call the `save` function first in the `createNote` callback function in the `App` component because when [GraphQL](https://graphql.org/) saves a note, it generates a unique `ID` that we want to have access to in our `note` array.
+
+```js
+const createNote = async () => {
+  const newNote = await save(formData);
+  const updatedNoteList = [...notes, newNote];
+  setNotes(updatedNoteList);
+};
+```
+
+- The final place that we need to remove `localforage` is in the `note.cy.js` Cypress test. GraphQL does not provide an equivalent API endpoint to delete all of the notes so we will not be able to simply replace the `localforage.clear()` function call with a GraphQL one. In a separate commit we will add the ability to delete notes by `ID` through the UI. This is a [mutation](https://graphql.org/learn/queries/#mutations) that GraphQL provides. But for now we will just remove the clean up in the Cypress test.
+
+```js
+describe('Note Capture', () => {
+  before(() => {
+      cy.signIn();
+  });
+
+  after(() => {
+      cy.clearLocalStorageSnapshot();
+      cy.clearLocalStorage();
+  });
+  ...
+```
+
+- Finally remove `localforage` by running `npm uninstall localforage`
+
+- Rerun all of the tests
+- Green!
+- Commit
+
 [Code for this section]()
 
 </details>
