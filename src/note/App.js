@@ -1,6 +1,9 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { Authenticator } from '@aws-amplify/ui-react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { findAll, save, deleteById } from '../common/NoteRepository';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
@@ -37,16 +40,28 @@ function App() {
   return (
     <Authenticator>
       {({ signOut, user }) => (
-        <div className="App">
-          <Header signOut={signOut} user={user} />
-          <NoteForm
-            notes={notes}
-            formData={formData}
-            setFormDataCallback={setFormData}
-            setNotesCallback={createNote}
-          />
-          <NoteList notes={notes} deleteNoteCallback={deleteNoteCallback} />
-        </div>
+        <Container>
+          <Row>
+            <Col md={6}>
+              <Header signOut={signOut} user={user} />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <NoteForm
+                notes={notes}
+                formData={formData}
+                setFormDataCallback={setFormData}
+                setNotesCallback={createNote}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <NoteList notes={notes} deleteNoteCallback={deleteNoteCallback} />
+            </Col>
+          </Row>
+        </Container>
       )}
     </Authenticator>
   );
