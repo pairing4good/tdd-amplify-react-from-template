@@ -2098,6 +2098,78 @@ export default NoteList;
 - Green
 - Commit
 
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/9c699811322f08173656e680bf5a8026e371620c)
+
+</details>
+
+<details>
+  <summary>Note List Component Testing</summary>
+
+## Note List Component Testing
+
+Since we started at the top of the testing pyramid we need to make sure, once we are on green, that we work our way down to lower level tests too.
+
+- Add a test to `NoteList.test.js` to verify the deletion behavior of the `NoteList` component.
+
+```js
+import { render, screen, fireEvent } from '@testing-library/react';
+import NoteList from '../NoteList';
+
+const mockDeleteNoteCallback = jest.fn();
+
+const defaultProps = {
+  notes: [],
+  deleteNoteCallback: mockDeleteNoteCallback
+};
+
+const setup = (props = {}) => {
+  const setupProps = { ...defaultProps, ...props };
+  const { notes, deleteNoteCallback } = setupProps;
+  return render(<NoteList notes={notes} deleteNoteCallback={deleteNoteCallback} />);
+};
+
+test('should display nothing when no notes are provided', () => {
+  setup();
+  ...
+});
+
+test('should display one note when one notes is provided', () => {
+  const note = { name: 'test name', description: 'test description' };
+  setup({ notes: [note] });
+  ...
+});
+
+test('should display multiple notes when more than one notes is provided', () => {
+  const firstNote = { name: 'test name 1', description: 'test description 1' };
+  const secondNote = { name: 'test name 1', description: 'test description 1' };
+  setup({ notes: [firstNote, secondNote] });
+  ...
+});
+
+...
+
+test('should delete note when clicked', () => {
+  const note = {
+    id: 1,
+    name: 'test name 1',
+    description: 'test description 1'
+  };
+  setup({ notes: [note] });
+  const button = screen.getByTestId('test-delete-button-0');
+
+  fireEvent.click(button);
+
+  expect(mockDeleteNoteCallback.mock.calls.length).toBe(1);
+  expect(mockDeleteNoteCallback.mock.calls[0][0]).toStrictEqual(1);
+});
+```
+
+- I added a mock function for the `deleteNoteCallback` and a `setup` function that has properties that can be overridden for specific test cases. This is a pattern that is often used in this style of tests.
+
+- Run all of the tests
+- Green
+- Commit
+
 [Code for this section]()
 
 </details>
