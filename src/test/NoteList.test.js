@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import NoteList from '../NoteList';
+import NoteList from '../note/NoteList';
 
 const mockDeleteNoteCallback = jest.fn();
 

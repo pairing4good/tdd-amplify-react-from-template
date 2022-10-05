@@ -1,9 +1,9 @@
 import { API } from 'aws-amplify';
-import { listNotes } from './graphql/queries';
+import { listNotes } from '../graphql/queries';
 import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation
-} from './graphql/mutations';
+} from '../graphql/mutations';
 
 export async function findAll() {
   const apiData = await API.graphql({ query: listNotes });

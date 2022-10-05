@@ -2249,6 +2249,36 @@ it('should delete note by id', () => {
 - Green!
 - Commit
 
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/8ab209ffd68b068c58719028d5c2af059b1fc00c)
+
+</details>
+
+<details>
+  <summary>Refactor Project Structure</summary>
+
+## Refactor Project Structure
+
+It's best to organize your code into a logical [folder structure](https://reactjs.org/docs/faq-structure.html) so that it's easier to understand and navigate.
+
+- Move all of the components into a `note` folder in `src`
+
+- note/
+
+  - App.js
+  - Header.js
+  - NoteForm.js
+  - NoteList.js
+
+- Move the `NoteRepository` component to a `common` folder in `src`
+
+- common/
+
+  - NoteRepository.js
+
+- Run all the tests
+- Green
+- Commit
+
 [Code for this section]()
 
 </details>

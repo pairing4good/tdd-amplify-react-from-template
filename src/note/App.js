@@ -1,7 +1,7 @@
-import './App.css';
+import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { Authenticator } from '@aws-amplify/ui-react';
-import { findAll, save, deleteById } from './NoteRepository';
+import { findAll, save, deleteById } from '../common/NoteRepository';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
 import Header from './Header';

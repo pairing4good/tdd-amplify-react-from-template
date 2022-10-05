@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Header from '../Header';
+import Header from '../note/Header';
 
 const signOut = jest.fn();
 const user = { username: 'testUserName' };

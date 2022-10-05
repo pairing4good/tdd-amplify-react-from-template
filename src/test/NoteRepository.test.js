@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { save, findAll, deleteById } from '../NoteRepository';
+import { save, findAll, deleteById } from '../common/NoteRepository';
 import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation
