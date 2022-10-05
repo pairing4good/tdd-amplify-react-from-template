@@ -2431,6 +2431,6 @@ return (
 - Green
 - Commit
 
-[Code for this section]()
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/e8b1fa451b4bb747c3f99275c0fc781ccb5973f4)
 
 </details>
