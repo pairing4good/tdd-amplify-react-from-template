@@ -3,7 +3,6 @@
 ![Security Checks](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![React Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/node.js.yml/badge.svg)
 
-
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a react app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
 
 <details>
@@ -23,7 +22,7 @@ There are a few benefits of starting at the top of the testing pyramid:
   <summary>Set Up</summary>
 
 - Download and install [Visual Studio Code](https://code.visualstudio.com/)
-- Open VS Code and set up the ability to [launch VS Code from the terminal](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line) 
+- Open VS Code and set up the ability to [launch VS Code from the terminal](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
 - Install [Node Version Manager](https://github.com/nvm-sh/nvm). `nvm` allows you to quickly install and use different versions of node via the command line.
 - Run `nvm install node` to install the latest version of node
 - Run `nvm use node` to use the latest version of node
@@ -42,6 +41,7 @@ There are a few benefits of starting at the top of the testing pyramid:
 ![React Tests](https://github.com/{username}/{repository}/actions/workflows/node.js.yml/badge.svg)
 ![Cypress Tests](https://github.com/{username}/{repository}/actions/workflows/cypress.yml/badge.svg)
 ```
+
 - Update the `name` of your application in the `package.json` file in the root of your repository
 
 - [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) your new repository
@@ -95,6 +95,7 @@ describe('Note Capture', () => {
   });
 });
 ```
+
 - Run `npm install`
 - Run `npm run cypress:test`
 
@@ -232,13 +233,13 @@ export default NoteForm;
 
 ```js
 <div>
-    <input data-testid="note-name-field" />
-    <input data-testid="note-description-field" />
-    <button data-testid="note-form-submit" type="button">
-        Submit
-    </button>
-    <p data-testid="test-name-0">test note</p>
-    <p data-testid="test-description-0">test note description</p>
+  <input data-testid="note-name-field" />
+  <input data-testid="note-description-field" />
+  <button data-testid="note-form-submit" type="button">
+    Submit
+  </button>
+  <p data-testid="test-name-0">test note</p>
+  <p data-testid="test-description-0">test note description</p>
 </div>
 ```
 
@@ -291,6 +292,7 @@ test('should display a create note button', () => {});
 - The test name should be conversational and intent revealing. It should avoid technical words like "render", "component", and the like. We want a new team member to be able to read this test and understand the customer value. The body of the test will provide the technical HOW but the test name should point to the customer's WHY and WHAT.
 
 - Now we will add a test that renders the component and asserts that the button is labeled "Create Note". For more information on the React Testing Library visit https://testing-library.com/docs
+
 ```js
 import { render, screen } from '@testing-library/react';
 import NoteForm from '../NoteForm';
@@ -316,15 +318,14 @@ Received:
 
 ```js
 <button data-testid="note-form-submit" type="button">
-    Create Note
+  Create Note
 </button>
 ```
 
-- The test automatically reruns once the change is saved.  This is accomplished through jest's [watch](https://jestjs.io/docs/cli) mode.
+- The test automatically reruns once the change is saved. This is accomplished through jest's [watch](https://jestjs.io/docs/cli) mode.
 - **Be sure to always commit on green**. We value working code. `Green Code = Working Code`
 
 [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/6f0a5f6fc23f032f8ce8e548b56ba3d4bb769e4f)
-
 
 ### Name Input Test
 
@@ -372,7 +373,6 @@ test('should display the description placeholder', () => {
 
 [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/ea1861b8ca295103312db32cc5667111b531d9ba)
 
-
 ### Refactor
 
 Every test starts with `render(<NoteForm />)`. Let's extract this duplicated set up code and place it in the test setup.
@@ -394,6 +394,7 @@ test('should display a create note button', () => {
 - Commit
 
 [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/7fcbf5cd73f1f7b0895c5df680eee4c42eeabe48)
+
 </details>
 
 <details>
@@ -401,7 +402,7 @@ test('should display a create note button', () => {
 
 ## Saving A Note
 
-While the application could be demoed to the customer their feedback would be limited to formatting, styling and placement. But the customer actually wants to save notes and view them.  Let's add a little more functionality before we demo this to our customer.
+While the application could be demoed to the customer their feedback would be limited to formatting, styling and placement. But the customer actually wants to save notes and view them. Let's add a little more functionality before we demo this to our customer.
 
 ### User Acceptance Criteria
 
@@ -440,6 +441,7 @@ it('should create a note when name and description provided', () => {
   cy.get('[data-testid=test-description-0]').should('have.text', 'test note description');
 });
 ```
+
 - Run `npm run cypress:test`
 - Now we have a failing test to drive new functionality
 
@@ -506,7 +508,8 @@ NoteForm.propTypes = {
 
 export default NoteForm;
 ```
-*Note: [Typechecking With PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) is a recommended practice for components that take parameters. As your app grows, typechecking will help prevent alot of issues.*
+
+_Note: [Typechecking With PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) is a recommended practice for components that take parameters. As your app grows, typechecking will help prevent alot of issues._
 
 While this satisfied the first acceptance criteria, now the second acceptance criteria fails.
 
@@ -593,7 +596,7 @@ export default NoteForm;
   onChange={(e) =>
     setFormDataCallback({
       ...formData,
-      description: e.target.value,
+      description: e.target.value
     })
   }
   placeholder="Note Description"
@@ -679,7 +682,7 @@ function NoteForm(props) {
         onChange={(e) =>
           setFormDataCallback({
             ...formData,
-            name: e.target.value,
+            name: e.target.value
           })
         }
         placeholder="Note Name"
@@ -689,22 +692,19 @@ function NoteForm(props) {
         onChange={(e) =>
           setFormDataCallback({
             ...formData,
-            description: e.target.value,
+            description: e.target.value
           })
         }
         placeholder="Note Description"
       />
-      <button
-        data-testid="note-form-submit"
-        onClick={() => setNotesCallback([...notes, formData])}
-      >
+      <button data-testid="note-form-submit" onClick={() => setNotesCallback([...notes, formData])}>
         Create Note
       </button>
       // 2. Note Listing
       {notes.map((note, index) => (
         <div>
-          <p data-testid={"test-name-" + index}>{note.name}</p>
-          <p data-testid={"test-description-" + index}>{note.description}</p>
+          <p data-testid={'test-name-' + index}>{note.name}</p>
+          <p data-testid={'test-description-' + index}>{note.description}</p>
         </div>
       ))}
     </div>
@@ -997,7 +997,7 @@ These tight feedback loops help software developers avoid going down rabbit hole
 
 ### Form Validation
 
-Let's assume that the note's name and description are both required fields. While you want the customer driving decisions about your product, one way to gather customer feedback is to launch-and-learn. Your customers will tell you if they don't like your decision.  As software developers we must be obsessed with our customers. Set up a regular cadence to meet with your customers and demonstrate a working application. Make space for them to let you know what they think.
+Let's assume that the note's name and description are both required fields. While you want the customer driving decisions about your product, one way to gather customer feedback is to launch-and-learn. Your customers will tell you if they don't like your decision. As software developers we must be obsessed with our customers. Set up a regular cadence to meet with your customers and demonstrate a working application. Make space for them to let you know what they think.
 
 In order to test drive validation we need to determine where in the testing pyramid to write this test. Remember that the highest-level tests are slow and expensive, so limit these tests to between 3 to 5 tests that walk through the most common user experiences. In order to adequately test all of the combinations of good and bad fields, these tests would not be well suited for UI testing.
 
@@ -1452,6 +1452,7 @@ Do you want to configure advanced settings? No, I am done.
 - This command updated the following resources on AWS
   - amplify-tddamplifyreact-dev-x… AWS::CloudFormation::Stack
 - This command created the following resources on AWS
+
   - authtddamplifyreactxxxxxxxx AWS::CloudFormation::Stack
   - UserPool AWS::Cognito::UserPool
   - UserPoolClientWeb AWS::Cognito::UserPoolClient
@@ -1494,7 +1495,7 @@ function App() {
 export default App;
 ```
 
-While `import '@aws-amplify/ui-react/styles.css';` is required for the login screen to display correctly, the [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import/blob/v2.26.0/docs/rules/no-unresolved.md) plugn lists it as unresolved.  As a rule of thumb, avoid disabling any [ESLint](https://eslint.org/) rules.  They almost always lead you to better code.  However, this [Amplify UI component](https://docs.amplify.aws/ui/q/framework/react/) does not have a solution that I was able to find.  In this rare circumstance, only disable a sigle line of code with `// eslint-disable-next-line import/no-unresolved`.  That way [ESLint](https://eslint.org/) rules will be applied to the rest of the file.
+While `import '@aws-amplify/ui-react/styles.css';` is required for the login screen to display correctly, the [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import/blob/v2.26.0/docs/rules/no-unresolved.md) plugn lists it as unresolved. As a rule of thumb, avoid disabling any [ESLint](https://eslint.org/) rules. They almost always lead you to better code. However, this [Amplify UI component](https://docs.amplify.aws/ui/q/framework/react/) does not have a solution that I was able to find. In this rare circumstance, only disable a sigle line of code with `// eslint-disable-next-line import/no-unresolved`. That way [ESLint](https://eslint.org/) rules will be applied to the rest of the file.
 
 - Run `npm start`
 
@@ -1612,22 +1613,23 @@ afterEach(() => {
   
   ## Failing Continuous Integration Build
 
-  While all the tests pass locally, on my machine, the Cypress tests are breaking on GitHub with the following error
+While all the tests pass locally, on my machine, the Cypress tests are breaking on GitHub with the following error
 
-  ```
-  Module not found: Error: Can't resolve './aws-exports' in '/home/runner/work/tdd-amplify-react-from-template/tdd-amplify-react-from-template/src'
-  ```
+```
+Module not found: Error: Can't resolve './aws-exports' in '/home/runner/work/tdd-amplify-react-from-template/tdd-amplify-react-from-template/src'
+```
 
-  The `aws-exports` file was created and added to the `.gitignore` file in the `Set Up AWS Amplify` section of this tutorial.  Once we added `import config from './aws-exports';` to  the `src/index.js` file we required `aws-exports` for testing.  Since we added this file to `.gitignore` it was not committed or pushed up to [GitHub](https://github.com/).  As a result, the [GitHub Action](https://docs.github.com/en/actions) tests are failing.
+The `aws-exports` file was created and added to the `.gitignore` file in the `Set Up AWS Amplify` section of this tutorial. Once we added `import config from './aws-exports';` to the `src/index.js` file we required `aws-exports` for testing. Since we added this file to `.gitignore` it was not committed or pushed up to [GitHub](https://github.com/). As a result, the [GitHub Action](https://docs.github.com/en/actions) tests are failing.
 
-  In order for these tests to pass [GitHub Action](https://docs.github.com/en/actions) would need access to Amplify, configure Amplify on the build machine and have the ability to deploy the backend to Amplify.  Instead of setting up this tight coupling from [GitHub](https://github.com/) to [AWS Amplify](https://aws.amazon.com/amplify), we will utilize the [build process](https://docs.aws.amazon.com/amplify/latest/userguide/build-settings.html) provided within [Amplify](https://aws.amazon.com/amplify).  This will be set up in the next section.
+In order for these tests to pass [GitHub Action](https://docs.github.com/en/actions) would need access to Amplify, configure Amplify on the build machine and have the ability to deploy the backend to Amplify. Instead of setting up this tight coupling from [GitHub](https://github.com/) to [AWS Amplify](https://aws.amazon.com/amplify), we will utilize the [build process](https://docs.aws.amazon.com/amplify/latest/userguide/build-settings.html) provided within [Amplify](https://aws.amazon.com/amplify). This will be set up in the next section.
 
-  For now, let's remove the [Cypress]() tests from [GitHub Actions](https://docs.github.com/en/actions) and the build badge from the `README.md` file.
+For now, let's remove the [Cypress]() tests from [GitHub Actions](https://docs.github.com/en/actions) and the build badge from the `README.md` file.
 
-  - Delete the `.github/workflows/cypress.yml` file
-  - Remove `![Cypress Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/cypress.yml/badge.svg)` from the top of the `README.md` file.
+- Delete the `.github/workflows/cypress.yml` file
+- Remove `![Cypress Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/cypress.yml/badge.svg)` from the top of the `README.md` file.
 
-  [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/5788564a7b9aaad1a44b54c9ec4551a18f548443)
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/5788564a7b9aaad1a44b54c9ec4551a18f548443)
+
 </details>
 
 <details>
@@ -1665,6 +1667,7 @@ Amplify provides the ability to [deploy](https://docs.amplify.aws/guides/hosting
 - Click the `Save` button
 
 ### Adding Tests to Amplify Build
+
 - Add a new file named `amplify.yml` to the root of your repository with the following content
 
 ```yml
@@ -1711,7 +1714,9 @@ test:
       - '**/*.png'
       - '**/*.mp4'
 ```
-This file overrides the default build setting provided by Amplify.  However, to display the `Test` green or red circle in the build status timeline, you must update the default build settings.
+
+This file overrides the default build setting provided by Amplify. However, to display the `Test` green or red circle in the build status timeline, you must update the default build settings.
+
 - On the left navigation within your AWS Amplify Application, select `Build settings`
 - Click the `Edit` button in the `App build specification` section
 - At the bottom of the `Edit` window add the following
@@ -1724,9 +1729,10 @@ This file overrides the default build setting provided by Amplify.  However, to 
 
 test:
 ```
+
 - Click the `Save` button
 
-By adding `test:`, the `Test` circle will now display in the build status timeline.  Nevertheless, the build instructions will be read from the root of your repository and will override the content of the default build settings.
+By adding `test:`, the `Test` circle will now display in the build status timeline. Nevertheless, the build instructions will be read from the root of your repository and will override the content of the default build settings.
 
 - Commit your local changes and [push](https://docs.github.com/en/github/importing-your-projects-to-github/importing-source-code-to-github/adding-an-existing-project-to-github-using-the-command-line) them up to your GitHub account
 
@@ -1752,6 +1758,7 @@ So what does this Amplify build actually do?
 - This deployment pipeline kicks off every time you push your code up to GitHub.
 
 [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/156482d532e70a9e7d7d4c03bd9706f0e7fbd544)
+
 </details>
 
 <details>
@@ -1769,10 +1776,11 @@ it('should have an option to sign out', () => {
   cy.get('[data-amplify-authenticator]').should('exist');
 });
 ```
+
 - Run all the tests
 - Red
 
-- Add the following [properties](https://reactjs.org/docs/components-and-props.html) to the `App.js` component that come from the [Authenticator](https://ui.docs.amplify.aws/react/connected-components/authenticator#3-add-the-authenticator).  Pass the `signOut` and `user` properties to the `Header` component.
+- Add the following [properties](https://reactjs.org/docs/components-and-props.html) to the `App.js` component that come from the [Authenticator](https://ui.docs.amplify.aws/react/connected-components/authenticator#3-add-the-authenticator). Pass the `signOut` and `user` properties to the `Header` component.
 
 ```js
 <Authenticator>
@@ -1812,7 +1820,6 @@ test('should display sign out', () => {
   const signOutButton = screen.getByTestId('sign-out');
   expect(signOutButton).toHaveTextContent('Sign out');
 });
-
 ```
 
 - Add the following to the `Header.js` component
@@ -1842,7 +1849,6 @@ Header.propTypes = {
 };
 
 export default Header;
-
 ```
 
 - Run all the tests
@@ -1885,20 +1891,22 @@ type Note @model {
   description: String
 }
 ```
+
 `input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }` allows you to get started quickly without worrying about authorization rules. Review the [Authorization rules](https://docs.amplify.aws/cli/graphql/authorization-rules/) section to setup the appropriate access control for your GraphQL API. (https://docs.amplify.aws/cli/graphql/overview/#creating-your-first-table)
 
 - Run `amplify push --y`
 
 - This command created/updated the following resources on AWS
+
   - amplify-tddamplifyreact-dev-8… AWS::CloudFormation::Stack
-  - apitddamplifyreact             AWS::CloudFormation::Stack
-  - authtddamplifyreact414f1c62    AWS::CloudFormation::Stack
-  - GraphQLAPI                     AWS::AppSync::GraphQLApi
+  - apitddamplifyreact AWS::CloudFormation::Stack
+  - authtddamplifyreact414f1c62 AWS::CloudFormation::Stack
+  - GraphQLAPI AWS::AppSync::GraphQLApi
   - GraphQLAPITransformerSchema3C… AWS::AppSync::GraphQLSchema
   - GraphQLAPIDefaultApiKey215A6D… AWS::AppSync::ApiKey
-  - GraphQLAPINONEDS95A13CF0       AWS::AppSync::DataSource
-  - Note                           AWS::CloudFormation::Stack
-  - CustomResourcesjson            AWS::CloudFormation::Stack
+  - GraphQLAPINONEDS95A13CF0 AWS::AppSync::DataSource
+  - Note AWS::CloudFormation::Stack
+  - CustomResourcesjson AWS::CloudFormation::Stack
 
 - If you would like to explore the backend, take a look at [Amplify Studio](https://docs.amplify.aws/console/).
 
@@ -1956,6 +1964,138 @@ describe('Note Capture', () => {
 
 - Rerun all of the tests
 - Green!
+- Commit
+
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/00fc9b7a97c3f3fcc6200fffac7b4f30c051c864)
+
+</details>
+
+<details>
+  <summary>Add Note Deletion</summary>
+
+## Add Note Deletion
+
+In order to add note deletion, let's drive this from the Cypress test. This will help in cleaning up notes that were created during the UI test.
+
+- Add a deletion test to the Cypress test
+
+```js
+it('should delete note', () => {
+  cy.get('[data-testid=test-delete-button-0]').click();
+
+  cy.get('[data-testid=test-name-0]').should('not.exist');
+  cy.get('[data-testid=test-description-0]').should('not.exist');
+});
+
+it('should have an option to sign out', () => {
+...
+```
+
+Now that we've removed `localForage` and the `localForage.clear();` from the Cypress test we need to provide a way to remove any notes that were added outside of the test.
+
+- Add notes clean up before the Cypress tests are run
+
+```js
+/* eslint-disable promise/always-return */
+/* eslint-disable promise/catch-or-return */
+
+before(() => {
+  cy.intercept('**/graphql').as('notesApi');
+
+  cy.signIn();
+  cy.visit('/');
+
+  cy.wait('@notesApi');
+  cy.get('div').then(() => {
+    cy.wait('@notesApi');
+    Cypress.$('[data-testid^="test-delete-button-').each(() => {
+      cy.get('[data-testid="test-delete-button-0"]').click();
+    });
+    return true;
+  });
+});
+```
+Here's a break down of what is being done in `before`:
+  - Cypress tests are run [asynchronously](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous). In order to run the `Cypress.$('[data-testid^="test-delete-button-')` command, which returns a list of deletion buttons, you must wrap that command inside a [.then()](https://docs.cypress.io/api/commands/then) function.
+  - Cypress [then](https://docs.cypress.io/api/commands/then) is similar to a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) but it does not have a [catch](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#You-cannot-add-a-catch-error-handler-to-a-failed-command) function. This is why you need to add `/* eslint-disable promise/catch-or-return */` to the top of the test in order to ignore the [ESLint](https://github.com/eslint-community/eslint-plugin-promise) error.
+  - Cypress [then](https://docs.cypress.io/api/commands/then) is similar to a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) but it can not return a value to satisfy the [ESLint](https://github.com/eslint-community/eslint-plugin-promise) error.  This is why you need to add `/* eslint-disable promise/always-return */` to the top of the test.
+  - Cypress [intercept](https://docs.cypress.io/api/commands/intercept) provides the ability to [wait](https://docs.cypress.io/api/commands/wait) for [GraphQL](https://docs.cypress.io/guides/end-to-end-testing/working-with-graphql) to return a list of notes.
+  - Cypress [\$](https://docs.cypress.io/api/utilities/$) allows you to look for [HTML elements](https://www.w3schools.com/html/html_elements.asp) without failing if the element is not found.
+
+
+- Run the Cypress test and verify that it Fails
+- To make it go green, add a new deletion function to `NoteRepository.js`
+
+```js
+...
+import {
+  createNote as createNoteMutation,
+  deleteNote as deleteNoteMutation
+} from './graphql/mutations';
+
+...
+
+export async function deleteById(id) {
+  return API.graphql({ query: deleteNoteMutation, variables: { input: { id } } });
+}
+```
+
+- Create a new deletion callback function in `App.js`
+
+```js
+import { findAll, save, deleteById } from './NoteRepository';
+...
+const deleteNoteCallback = async (id) => {
+  const newNotesArray = notes.filter((note) => note.id !== id);
+  setNotes(newNotesArray);
+  await deleteById(id);
+};
+```
+
+- Pass the `deleteNoteCallback` callback function parameter to the `NoteList` component.
+
+```js
+<NoteList notes={notes} deleteNoteCallback={deleteNoteCallback} />
+```
+
+- Add a deletion button to the `NoteList` component
+
+```js
+import PropTypes from 'prop-types';
+
+function NoteList(props) {
+  const { notes, deleteNoteCallback } = props;
+
+  return (
+    <div>
+      {notes.map((note, index) => (
+        <div>
+          <p data-testid={`test-name-${index}`}>{note.name}</p>
+          <p data-testid={`test-description-${index}`}>{note.description}</p>
+          <button
+            type="button"
+            data-testid={`test-delete-button-${index}`}
+            onClick={() => deleteNoteCallback(note.id)}>
+            Delete note
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+NoteList.propTypes = {
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string, description: PropTypes.string })
+  ).isRequired,
+  deleteNoteCallback: PropTypes.func.isRequired
+};
+
+export default NoteList;
+```
+
+- Run all the tests
+- Green
 - Commit
 
 [Code for this section]()

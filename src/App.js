@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Authenticator } from '@aws-amplify/ui-react';
-import { findAll, save } from './NoteRepository';
+import { findAll, save, deleteById } from './NoteRepository';
 import NoteForm from './NoteForm';
 import NoteList from './NoteList';
 import Header from './Header';
@@ -24,6 +24,12 @@ function App() {
     setNotes(updatedNoteList);
   };
 
+  const deleteNoteCallback = async (id) => {
+    const newNotesArray = notes.filter((note) => note.id !== id);
+    setNotes(newNotesArray);
+    await deleteById(id);
+  };
+
   useEffect(() => {
     fetchNotesCallback();
   }, []);
@@ -39,7 +45,7 @@ function App() {
             setFormDataCallback={setFormData}
             setNotesCallback={createNote}
           />
-          <NoteList notes={notes} />
+          <NoteList notes={notes} deleteNoteCallback={deleteNoteCallback} />
         </div>
       )}
     </Authenticator>
