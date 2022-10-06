@@ -69,6 +69,11 @@ When the user enters a new note title and description
 Then a list of two notes are displayed
 ```
 
+### Big & Visible Progress
+Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  [Add your stories](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-items-in-your-project/adding-items-to-your-project) to the repository.  Here's an example of adding the story above to a [project](https://github.com/users/pairing4good/projects/4/views/1).  Click on the story name to see the full detial with user story and acceptance criteria.
+
+Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  Move each story accross the board as it moves from `ToDo` to `In Progress` to `Done`.  We want anyone inside and outside your team to quickly see the progress that you are making.
+
 ### Red - Acceptance Test
 
 The user story and acceptance criteria above describe a desired customer outcome. The user acceptance test will link this narrative with a high level how. For this tutorial our first application will be a [web application](https://en.wikipedia.org/wiki/Web_application) built with [React](https://reactjs.org). The testing framework use to test this will be [Cypress](https://www.cypress.io)
