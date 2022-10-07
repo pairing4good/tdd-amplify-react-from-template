@@ -2583,6 +2583,6 @@ The [Analytics.record](https://docs.amplify.aws/lib/analytics/record/q/platform/
 - Green
 - Commit
 
-[Code for this section]()
+[Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/463063f30f40144e77bb0c562ce4b11266e3a255)
 
 </details>
