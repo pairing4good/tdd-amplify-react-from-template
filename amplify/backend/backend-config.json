@@ -42,5 +42,11 @@
         }
       }
     }
+  },
+  "analytics": {
+    "tddamplifyreactfromt": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

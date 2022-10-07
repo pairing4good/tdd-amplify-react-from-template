@@ -2439,3 +2439,150 @@ return (
 [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/e8b1fa451b4bb747c3f99275c0fc781ccb5973f4)
 
 </details>
+
+<details>
+  <summary>Launch and Learn</summary>
+
+## Launch and Learn
+
+We value customer feedback.  We demonstrate working software to our customers and plug their feedback into our product.  In addition to person-to-person feedback, we bake feedback loops into our software applications.  This enables us to validate what customers say they want with what they actually do.  We value making data-driven-decisions through tight [build-measure-learn](http://theleanstartup.com/principles) loops. 
+
+In the [build-measure-learn](http://theleanstartup.com/principles) cycle we start with what we want to learn.  
+
+In the case of our application...
+
+**Learn:**
+Are users creating notes?
+
+**Measure:**
+Record when users `sign up`, `sign in`, and `note creation`
+
+**Build:**
+Add [Amplify analytics](https://docs.amplify.aws/lib/analytics/getting-started/q/platform/js/) to record when users `sign up`, `sign in`, and `note creation`
+
+This [customer journey](https://en.wikipedia.org/wiki/User_journey) from `sign up` to `note creation` is called a [conversion funnel](https://en.wikipedia.org/wiki/Purchase_funnel#Conversion_funnel).  We want to know if customers that sign up for our application decide to save their notes in our application.  [Amplify analytics](https://docs.amplify.aws/lib/analytics/getting-started/q/platform/js/) saves user interactions in [Amazon Pinpoint](https://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html).  One feature within [Amazon Pinpoint](https://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html) is the ability to creat [funnel charts](https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-funnels.html) that visualize the conversion rate of customers from one step in the funnel to the next step.
+
+Let's get started by adding [Amplify analytics](https://docs.amplify.aws/lib/analytics/getting-started/q/platform/js/) to our product.
+
+- Run `amplify add analytics`
+
+```
+Select an Analytics provider Amazon: Pinpoint
+Provide your pinpoint resource name: tddamplifyreact
+```
+
+- Add the following to the `src/index.js` file
+
+```js
+import { Amplify, Hub, Analytics } from 'aws-amplify';
+...
+Hub.listen('auth', async (data) => {
+  switch (data.payload.event) {
+    case 'signIn':
+      Analytics.record({
+        name: 'signIn',
+        attributes: { username: data.payload.data.username }
+      });
+      break;
+    case 'signUp':
+      Analytics.record({
+        name: 'signUp',
+        attributes: { username: data.payload.data.username }
+      });
+      break;
+    default:
+  }
+});
+```
+[Hub](https://docs.amplify.aws/lib/utilities/hub/q/platfor) provides a simple way to record common events within [Amplify](https://aws.amazon.com/amplify/) applications.  [Analytics](https://docs.amplify.aws/lib/analytics/getting-started/q/platform/js/#configure-your-app) records [events](https://docs.amplify.aws/lib/analytics/getting-started/q/platform/js/#recording-an-event) to [Amazon Pinpoint](https://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html).
+
+- Add the following to the `src/note/App.js` file
+
+```js
+...
+function App() {
+  ...
+  return (
+    <Authenticator>
+      {({ signOut, user }) => (
+        <Container>
+          ...
+          <Row>
+            <Col md={6}>
+              <NoteForm
+                ...
+                username={user.username}
+              />
+            </Col>
+          </Row>
+          ...
+        </Container>
+      )}
+    </Authenticator>
+  );
+}
+...
+```
+
+- Add the following to the `src/note/NoteForm.js` file
+
+```js
+...
+import { Analytics } from 'aws-amplify';
+
+function NoteForm(props) {
+  const { notes, setFormDataCallback, formData, setNotesCallback, username } = props;
+
+  const createNote = () => {
+    if (!formData.name || !formData.description) return;
+    ...
+    Analytics.record({
+      name: 'createNote',
+      attributes: { username }
+    });
+  };
+
+ ...
+
+NoteForm.propTypes = {
+  ...
+  username: PropTypes.string.isRequired
+};
+...
+```
+
+- Add the following to the `src/test/NoteForm.test.js` file
+
+```js
+...
+import { Analytics } from 'aws-amplify';
+...
+
+beforeEach(() => {
+  Analytics.record = jest.fn().mockImplementation(() => {});
+
+  render(
+    <NoteForm
+      ...
+      username="testUsername"
+    />
+  );
+});
+
+test('should display a create note button', () => {
+...
+});
+...
+```
+
+The [Analytics.record](https://docs.amplify.aws/lib/analytics/record/q/platform/js/) function must be mocked out in order to prevent a real call to [Amazon Pinpoint](https://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html) during this test.
+
+- Run `amplify push`
+
+- Run all of the tests
+- Green
+- Commit
+
+[Code for this section]()
+
+</details>

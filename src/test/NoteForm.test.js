@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Analytics } from 'aws-amplify';
 import NoteForm from '../note/NoteForm';
 
 const setNotesCallback = jest.fn();
@@ -6,12 +7,15 @@ const setFormDataCallback = jest.fn();
 const formData = { name: '', description: '' };
 
 beforeEach(() => {
+  Analytics.record = jest.fn().mockImplementation(() => {});
+
   render(
     <NoteForm
       notes={[]}
       setNotesCallback={setNotesCallback}
       setFormDataCallback={setFormDataCallback}
       formData={formData}
+      username="testUsername"
     />
   );
 });

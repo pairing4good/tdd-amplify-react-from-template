@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { Amplify } from 'aws-amplify';
+import { Amplify, Hub, Analytics } from 'aws-amplify';
 import App from './note/App';
 import reportWebVitals from './reportWebVitals';
 import config from './aws-exports';
 
 Amplify.configure(config);
+
+Hub.listen('auth', async (data) => {
+  switch (data.payload.event) {
+    case 'signIn':
+      Analytics.record({
+        name: 'signIn',
+        attributes: { username: data.payload.data.username }
+      });
+      break;
+    case 'signUp':
+      Analytics.record({
+        name: 'signUp',
+        attributes: { username: data.payload.data.username }
+      });
+      break;
+    default:
+  }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

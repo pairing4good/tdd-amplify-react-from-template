@@ -1,0 +1,21 @@
+{
+    "appName": "tddamplifyreactfromt",
+    "roleName": "pinpointLambdaRolebd8ca4ea",
+    "cloudformationPolicyName": "cloudformationPolicybd8ca4ea",
+    "cloudWatchPolicyName": "cloudWatchPolicybd8ca4ea",
+    "pinpointPolicyName": "pinpointPolicybd8ca4ea",
+    "authPolicyName": "pinpoint_amplify_bd8ca4ea",
+    "unauthPolicyName": "pinpoint_amplify_bd8ca4ea",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

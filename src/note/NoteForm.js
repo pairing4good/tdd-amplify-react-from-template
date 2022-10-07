@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Analytics } from 'aws-amplify';
 
 function NoteForm(props) {
-  const { notes, setFormDataCallback, formData, setNotesCallback } = props;
+  const { notes, setFormDataCallback, formData, setNotesCallback, username } = props;
 
   const createNote = () => {
     if (!formData.name || !formData.description) return;
     setNotesCallback([...notes, formData]);
     setFormDataCallback({ name: '', description: '' });
+    Analytics.record({
+      name: 'createNote',
+      attributes: { username }
+    });
   };
 
   return (
@@ -54,7 +59,8 @@ NoteForm.propTypes = {
   ).isRequired,
   setFormDataCallback: PropTypes.func.isRequired,
   formData: PropTypes.shape({ name: PropTypes.string, description: PropTypes.string }).isRequired,
-  setNotesCallback: PropTypes.func.isRequired
+  setNotesCallback: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired
 };
 
 export default NoteForm;
