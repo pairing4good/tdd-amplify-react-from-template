@@ -32,7 +32,7 @@ afterEach(() => {
 
 describe('Note Capture', () => {
   it('should have header', () => {
-    cy.get('h1').should('have.text', 'My Notes App');
+    cy.get('h1').should('have.text', 'My Notes Appz');
   });
 
   it('should create a note when name and description provided', () => {
