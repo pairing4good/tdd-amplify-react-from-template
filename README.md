@@ -2586,3 +2586,121 @@ The [Analytics.record](https://docs.amplify.aws/lib/analytics/record/q/platform/
 [Code for this section](https://github.com/pairing4good/tdd-amplify-react-from-template/commit/463063f30f40144e77bb0c562ce4b11266e3a255)
 
 </details>
+
+<details>
+  <summary>Team Member Workflow</summary>
+
+## Team Member Workflow
+
+### Forking Repository
+Team members will not commit directly to the Amplify React application repository.  Instead this repository will have limited access and deploy changes to higher environments.  Each team member will create a [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) of the application repository, make changes on their fork, run tests in isolation and submit changes through [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).  This style of development is called a [forking workflow](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html).  Since Amplify kicks off a build every time code is pushed to the GitHub repository, it's best to lock down the primary repository and force team members to work on personal forks instead.
+
+- Navigate to the primary repository
+- Click the `Fork` button on the top right of the page
+- Click the `Create fork` button
+
+- [Clone](https://github.com/git-guides/git-clone) your new forked repository
+- Set up the [upstream](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork) url
+
+- Log into AWS Amplify
+- Click on the `Build an app > Get started` button
+- Provide an `App name`
+- Click `Confirm deployment`
+
+- Click on the newly created application
+- Click on `GitHub`
+- Click on `Connect branch`
+- Select a repository
+- Click `Next`
+- Create an environment
+- Select a Role
+- Click `Next`
+- Click `Save and Deploy`
+
+- Wait for your application's `Backend` to `Build`
+- It will fail the tests because Cypress test's login environment variables are not set up yet
+
+- Navigate to your application
+- Select the `Backend environments` tab
+- Click on the `Local setup instructions` arrow
+- Copy the Amplify CLI `pull` command
+
+- Run the `pull` command at the root of your cloned repo
+
+```
+Opening link: https://us-east-2.admin.amplifyapp.com/admin/xxxx/main/verify/?loginVersion=1
+⠙ Confirm login in the browser or manually paste in your CLI login key:
+✔ Successfully received Amplify Studio tokens.
+Amplify AppID found: d1bwpz9lmtu5sw. Amplify App name is: test-app
+Backend environment main found in Amplify Console app: test-app
+? Choose your default editor: Visual Studio Code
+? Choose the type of app that you're building javascript
+Please tell us about your project
+? What javascript framework are you using react
+? Source Directory Path:  src
+? Distribution Directory Path: build
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+? Do you plan on modifying this backend? Yes
+```
+
+- Run `npm install`
+- Run `npm start`
+- Click `Create Account`
+- Create and verify a new account
+- Stop the server `Ctrl-c`
+
+- Create a new file at the root of your project named `cypress.env.json` with the following content
+
+```json
+{
+  "username": "[Login username you just created]",
+  "password": "[Login password you just created]",
+  "userPoolId": "[The `aws_user_pools_id` value found in your `src/aws-exports.js`]",
+  "clientId": "[The `aws_user_pools_web_client_id` value found in your `src/aws-exports.js`]"
+}
+```
+
+- Run `npm test`
+- Run  `npm run cypress:test`
+
+- Green
+
+- Add the properties to AWS Amplify.
+- Each environment variable has a prefix of `cypress_`
+
+  - cypress_username
+  - cypress_password
+  - cypress_userPoolId
+  - cypress_clientId
+
+- On the left navigation within your AWS Amplify Application, select `Environment variables`
+- Click the `Manage variables` button
+- Click the `Add variable` button
+- Type `cypress_username` in the field labeled `Enter variable here`
+- Type the corresponding value from your `cypress.env.json` in the field labeled `Enter value here`
+- Repeat the previous three steps for `cypress_password`, `cypress_userPoolId`, and `cypress_clientId`
+- Click the `Save` button
+
+- Navigate to your Amplify application
+- Click on the failing test circle icon
+- Click the `Redeploy this version` button
+
+- Green
+
+[Previews](https://docs.aws.amazon.com/amplify/latest/userguide/pr-previews.html) offer a way to preview changes before merging a pull request.
+- On the left navigation, click `Previews`
+- Click the `Enable previews` button
+- Click the `Install GitHub app` button and follow the instructions
+- Click on the radio button beside the your selected branch name
+- Click the `Manage` button
+- Toggle the `Disable` button
+- Click the `Confirm` button
+
+**Please make sure your repository is private.**  Amplify recommends that your repositories be private so that not just anyone can open a PR and consequently create a full-stack preview.  **This can result in unexpected AWS charges.**
+
+When you push new changes to your fork, your unit tests will be run along with other checks.  When you create a pull request the same checks will be made plus the Amplify preview will be created.  The preview build will run the Cypress tests.
+
+To block PR's from being merged when code checks fail, set up [branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule)
+
+</details>
