@@ -14,7 +14,7 @@ There are a few benefits of starting at the top of the testing pyramid:
 1. Customer Focus: Low level code clearly ties to high level customer value
 1. System Focus: The architecture evolves and expands on green.
 
-## Approach
+## Set Up
 - Download and install [Visual Studio Code](https://code.visualstudio.com/)
 - Open VS Code and set up the ability to [launch VS Code from the terminal](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
 - Install [Node Version Manager](https://github.com/nvm-sh/nvm). `nvm` allows you to quickly install and use different versions of node via the command line.
