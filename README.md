@@ -3,7 +3,7 @@
 ![Security Checks](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![React Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/node.js.yml/badge.svg)
 
-[Watch Set Up Video](https://youtu.be/Fuydm6HdTx0)
+[Watch Intro Video](https://youtu.be/Fuydm6HdTx0)
 
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a [React](https://reactjs.org/) app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
  
@@ -17,6 +17,9 @@ There are a few benefits of starting at the top of the testing pyramid:
 1. System Focus: The architecture evolves and expands on green.
 
 ## Set Up
+
+[Watch Set Up Video](https://youtu.be/2XErUDUBD0E)
+
 - Download and install [Visual Studio Code](https://code.visualstudio.com/)
 - Open VS Code and set up the ability to [launch VS Code from the terminal](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
 - Install [Node Version Manager](https://github.com/nvm-sh/nvm). `nvm` allows you to quickly install and use different versions of node via the command line.
