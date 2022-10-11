@@ -18,7 +18,7 @@ There are a few benefits of starting at the top of the testing pyramid:
 
 ## Set Up
 
-[Watch Set Up Video](https://youtu.be/2XErUDUBD0E)
+[![Watch Set Up Video](https://img.youtube.com/vi/2XErUDUBD0E/0.jpg)](https://www.youtube.com/watch?v=2XErUDUBD0E)
 
 - Download and install [Visual Studio Code](https://code.visualstudio.com/)
 - Open VS Code and set up the ability to [launch VS Code from the terminal](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
