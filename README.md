@@ -5,7 +5,7 @@
 
 [Watch Intro Video](https://youtu.be/Fuydm6HdTx0)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Fuydm6HdTx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include youtube.html id="JLMbpiywVxQ" %}
 
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a [React](https://reactjs.org/) app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
  
