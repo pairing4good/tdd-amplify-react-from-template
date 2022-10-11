@@ -3,7 +3,7 @@
 ![Security Checks](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![React Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/node.js.yml/badge.svg)
 
-[Watch Intro Video](https://youtu.be/Fuydm6HdTx0)
+[![Watch Intro Video](https://img.youtube.com/vi/Fuydm6HdTx0/0.jpg)](https://www.youtube.com/watch?v=Fuydm6HdTx0)
 
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a [React](https://reactjs.org/) app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
  
