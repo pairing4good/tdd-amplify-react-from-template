@@ -28,7 +28,7 @@ There are a few benefits of starting at the top of the testing pyramid:
 
 - If you haven't already, [create](https://docs.github.com/en/github/getting-started-with-github/signing-up-for-github/signing-up-for-a-new-github-account) a GitHub account
 
-[![Watch Set Up Video](https://img.youtube.com/vi/replace_me/0.jpg)](https://www.youtube.com/watch?v=replace_me)
+[![Watch Template Video](https://img.youtube.com/vi/replace_me/0.jpg)](https://www.youtube.com/watch?v=replace_me)
 
 - Use the [pairing4good/tdd-react-18-template](https://github.com/pairing4good/tdd-react-18-template) template.
 
