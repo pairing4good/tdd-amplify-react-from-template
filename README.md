@@ -51,11 +51,8 @@ There are a few benefits of starting at the top of the testing pyramid:
 <details>
   <summary>Big & Visible</summary>
  
-
 ## Big & Visible Progress
-Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  [Add your stories](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-items-in-your-project/adding-items-to-your-project) to the repository.  Click on the story name to see the full detial with user story and acceptance criteria.
-
-Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  Move each story accross the board as it moves from `ToDo` to `In Progress` to `Done`.  We want anyone inside and outside your team to quickly see the progress that you are making.
+Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  As you add stories,  each story will be moved accross the board from `ToDo` to `In Progress` to `Done`.  We show this progress so that anyone inside or outside the team can quickly see the progress that we are making.
  
 ## README
 The `README.md` file is the first thing anyone sees when they open this repository.  It's important to update your readme to include the following:
