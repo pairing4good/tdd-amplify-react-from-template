@@ -49,6 +49,23 @@ There are a few benefits of starting at the top of the testing pyramid:
 - [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) your new repository
 
 <details>
+  <summary>Big & Visible</summary>
+ 
+
+## Big & Visible Progress
+Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  [Add your stories](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-items-in-your-project/adding-items-to-your-project) to the repository.  Click on the story name to see the full detial with user story and acceptance criteria.
+
+Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  Move each story accross the board as it moves from `ToDo` to `In Progress` to `Done`.  We want anyone inside and outside your team to quickly see the progress that you are making.
+ 
+## README
+The `README.md` file is the first thing anyone sees when they open this repository.  It's important to update your readme to include the following:
+ 1. Title
+ 1. Description of your product
+ 1. Install and run instructions
+ 
+</details>
+ 
+<details>
   <summary>First Test</summary>
 
 ## First Test
@@ -68,11 +85,22 @@ Given that a note exists
 When the user enters a new note title and description
 Then a list of two notes are displayed
 ```
-
-### Big & Visible Progress
-Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  [Add your stories](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-items-in-your-project/adding-items-to-your-project) to the repository.  Here's an example of adding the story above to a [project](https://github.com/users/pairing4good/projects/4/views/1).  Click on the story name to see the full detial with user story and acceptance criteria.
-
-Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  Move each story accross the board as it moves from `ToDo` to `In Progress` to `Done`.  We want anyone inside and outside your team to quickly see the progress that you are making.
+ 
+### Add Story to Kanban Board
+Add this story to your [Kanban board](https://en.wikipedia.org/wiki/Kanban).  
+- Click the `+ Add item` link at the bottom of the `Todo` column
+- Enter the short description of `Capture Note`
+- Type `Enter`
+- Click on the story name `Capture Note`
+- Click the `Edit` link within the `description` section
+- Add the `As a`, `I want`, `So that` user story above
+- After the user story add an acceptance criteria section with the heading `Acceptance Criteria:`
+- Below that title add the `Given`, `When`, `Then` criteria
+- Click the `Update comment` button
+- Click the `x` button on the top right
+- Drag this new story from the `Todo` column into the `In Progress` column
+ 
+ This provides big and visible progress for everyone inside and outside the team.  Teams meet around this board [daily](https://en.wikipedia.org/wiki/Stand-up_meeting#Three_questions) to align, formulate a plan for the day, and make any impediments big and visible.
 
 ### Red - Acceptance Test
 
