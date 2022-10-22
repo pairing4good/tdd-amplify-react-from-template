@@ -305,6 +305,8 @@ Congratulations, you've successfully made an internal structural change "without
 
 ## NoteForm Test
 
+[![Watch React Template Overview Video](https://img.youtube.com/vi/70rvOLJXQvw/0.jpg)](https://www.youtube.com/watch?v=70rvOLJXQvw)
+
 Now that we have a high-level Cypress test in place, let's move down the testing pyramid into a component test. This test will use the React Testing Library's [render](https://testing-library.com/docs/react-testing-library/cheatsheet/) function to render the `NoteForm` component and assert its contents.
 
 Before we show this new form to our customer we need to test drive:
