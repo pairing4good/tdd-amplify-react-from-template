@@ -76,7 +76,7 @@ The `README.md` file is the first thing anyone sees when they open this reposito
 
 ## First Test
 
-[![Watch React Template Overview Video](https://img.youtube.com/vi/T_Ic8dzx8B0/0.jpg)](https://www.youtube.com/watch?v=T_Ic8dzx8B0)
+[![Watch React Template Overview Video](https://img.youtube.com/vi/nrMfKfi3V3k/0.jpg)](https://www.youtube.com/watch?v=nrMfKfi3V3k)
 
 ### Why: User Story
 
