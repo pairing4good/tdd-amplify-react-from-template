@@ -89,9 +89,21 @@ So that I can refer back to it later
 ### What: User Acceptance Criteria
 
 ```
-Given that a note exists
-When the user enters a new note title and description
-Then a list of two notes are displayed
+Given that no notes are entered
+When nothing is saved
+Then no notes should be listed
+```
+
+```
+Given that one note exists
+When a note is saved
+Then two notes should be listed
+```
+
+```
+Given a note exists
+When the application is opened
+Then a note is listed
 ```
  
 ### Add Story to Kanban Board
@@ -445,7 +457,7 @@ test('should display a create note button', () => {
 
 ## Saving A Note
 
-While the application could be demoed to the customer their feedback would be limited to formatting, styling and placement. But the customer actually wants to save notes and view them. Let's add a little more functionality before we demo this to our customer.
+So far we've only test driven the notes form and the ability to display a note.  Now let's test drive the ability to save notes.
 
 ### User Acceptance Criteria
 
