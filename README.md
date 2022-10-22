@@ -16,6 +16,10 @@ There are a few benefits of starting at the top of the testing pyramid:
 1. Customer Focus: Low level code clearly ties to high level customer value
 1. System Focus: The architecture evolves and expands on green.
 
+
+<details>
+  <summary>Set Up</summary>
+  
 ## Set Up
 
 [![Watch Set Up Video](https://img.youtube.com/vi/2XErUDUBD0E/0.jpg)](https://www.youtube.com/watch?v=2XErUDUBD0E)
@@ -48,12 +52,15 @@ There are a few benefits of starting at the top of the testing pyramid:
 
 - [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) your new repository
 
+</details>
+
 <details>
   <summary>Big & Visible</summary>
-  
-[![Watch React Template Overview Video](https://img.youtube.com/vi/YjTpd9XOMCg/0.jpg)](https://www.youtube.com/watch?v=YjTpd9XOMCg)
  
 ## Big & Visible Progress
+
+[![Watch React Template Overview Video](https://img.youtube.com/vi/YjTpd9XOMCg/0.jpg)](https://www.youtube.com/watch?v=YjTpd9XOMCg)
+
 Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  As you add stories,  each story will be moved accross the board from `ToDo` to `In Progress` to `Done`.  We show this progress so that anyone inside or outside the team can quickly see the progress that we are making.
  
 ## README
