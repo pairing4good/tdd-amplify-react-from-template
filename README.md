@@ -3,8 +3,6 @@
 ![Security Checks](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/codeql-analysis.yml/badge.svg)
 ![React Tests](https://github.com/pairing4good/tdd-amplify-react-from-template/actions/workflows/node.js.yml/badge.svg)
 
-[![Watch Intro Video](https://img.youtube.com/vi/Fuydm6HdTx0/0.jpg)](https://www.youtube.com/watch?v=Fuydm6HdTx0)
-
 In this tutorial we will [test drive](https://en.wikipedia.org/wiki/Test-driven_development) a [React](https://reactjs.org/) app which will use [AWS Amplify](https://aws.amazon.com/amplify) to set up authentication and the backend API.
  
 ## Approach
@@ -22,8 +20,6 @@ There are a few benefits of starting at the top of the testing pyramid:
   
 ## Set Up
 
-[![Watch Set Up Video](https://img.youtube.com/vi/2XErUDUBD0E/0.jpg)](https://www.youtube.com/watch?v=2XErUDUBD0E)
-
 - Download and install [Visual Studio Code](https://code.visualstudio.com/)
 - Open VS Code and set up the ability to [launch VS Code from the terminal](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
 - Install [Node Version Manager](https://github.com/nvm-sh/nvm). `nvm` allows you to quickly install and use different versions of node via the command line.
@@ -31,8 +27,6 @@ There are a few benefits of starting at the top of the testing pyramid:
 - Run `nvm use node` to use the latest version of node
 
 - If you haven't already, [create](https://docs.github.com/en/github/getting-started-with-github/signing-up-for-github/signing-up-for-a-new-github-account) a GitHub account
-
-[![Watch React Template Overview Video](https://img.youtube.com/vi/9EMAcP5xFM0/0.jpg)](https://www.youtube.com/watch?v=9EMAcP5xFM0)
 
 - Use the [pairing4good/tdd-react-18-template](https://github.com/pairing4good/tdd-react-18-template) template.
 
@@ -59,8 +53,6 @@ There are a few benefits of starting at the top of the testing pyramid:
  
 ## Big & Visible Progress
 
-[![Watch React Template Overview Video](https://img.youtube.com/vi/YjTpd9XOMCg/0.jpg)](https://www.youtube.com/watch?v=YjTpd9XOMCg)
-
 Create a new [Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/creating-projects/creating-a-project) and [add it to your repository](https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository).  Select the `Board` [layout](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects#adding-a-board-layout).  As you add stories,  each story will be moved accross the board from `ToDo` to `In Progress` to `Done`.  We show this progress so that anyone inside or outside the team can quickly see the progress that we are making.
  
 ## README
@@ -75,8 +67,6 @@ The `README.md` file is the first thing anyone sees when they open this reposito
   <summary>First Test</summary>
 
 ## First Test
-
-[![Watch React Template Overview Video](https://img.youtube.com/vi/nrMfKfi3V3k/0.jpg)](https://www.youtube.com/watch?v=nrMfKfi3V3k)
 
 ### Why: User Story
 
@@ -323,8 +313,6 @@ Congratulations, you've successfully made an internal structural change "without
   <summary>NoteForm Test</summary>
 
 ## NoteForm Test
-
-[![Watch React Template Overview Video](https://img.youtube.com/vi/70rvOLJXQvw/0.jpg)](https://www.youtube.com/watch?v=70rvOLJXQvw)
 
 Now that we have a high-level Cypress test in place, let's move down the testing pyramid into a component test. This test will use the React Testing Library's [render](https://testing-library.com/docs/react-testing-library/cheatsheet/) function to render the `NoteForm` component and assert its contents.
 
